@@ -34,7 +34,7 @@ public class App {
     /** Para associar produtos aos pedidos que os contêm */
     static TabelaHash<Produto, Lista<Pedido>> pedidosPorProduto;
 
-    static TabelaHash<Cliente, Lista<Produto>> produtosPorCliente;
+    static TabelaHash<Produto, Lista<Cliente>> clientesPorProdutos;
     
     
     static void limparTela() {
@@ -182,7 +182,7 @@ public class App {
                 Produto prod = produtosPorId.pesquisar(idProduto);                      //localiza produto na árvore
                 novoPedido.incluirProduto(prod);                                        //inclui produto no pedido
                 inserirNaTabela(pedidosPorProduto, prod, novoPedido);                   //associa pedido ao produto na tabela hash
-                inserirNaTabela(produtosPorCliente, cliente, prod);
+                inserirNaTabela(clientesPorProdutos, prod, cliente);
                 //TODO: (TAREFA 3)
                 //associar o produto incluido no pedido ao cliente  
         }
@@ -270,7 +270,9 @@ public class App {
     }
 
     static void clientesPorProduto(){
-        //TODO (TAREFA 3)
+        System.out.println("Digite a descricao do produto");
+        String desc = teclado.nextLine();
+        
     }
     public static void relatorioDeCliente(){
         //TODO (TAREFA 2)
@@ -296,7 +298,7 @@ public class App {
         produtosPorNome = new AVL<>(produtosPorId, prod -> prod.descricao, String::compareTo);
         
         pedidosPorProduto = new TabelaHash<>((int)(produtosPorId.tamanho()*1.25));
-        produtosPorCliente = new TabelaHash<>(5000);
+        clientesPorProdutos = new TabelaHash<>(5000);
         
         gerarPedidos(25000);
     }
