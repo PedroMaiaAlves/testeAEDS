@@ -380,4 +380,8 @@ public class Lista<E> implements IMedicao{
 	public double getTempo() {
 		return tempo;	
 	}
+
+	public Celula<E> getPrimerio(){
+		return this.primeiro;
+	}
 }
