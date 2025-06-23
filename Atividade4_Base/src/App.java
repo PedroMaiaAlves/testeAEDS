@@ -272,7 +272,14 @@ public class App {
     static void clientesPorProduto(){
         System.out.println("Digite a descricao do produto");
         String desc = teclado.nextLine();
-        
+
+        Produto p = produtosPorNome.pesquisar(desc);
+
+        Lista<Cliente> clientes = clientesPorProdutos.pesquisar(p);
+
+        for(Celula<Cliente> i = clientes.getPrimerio(); i != null; i = i.getProximo()){
+            System.out.printf("Nome: ", i.getItem().toString());
+        }
     }
     public static void relatorioDeCliente(){
         //TODO (TAREFA 2)
@@ -291,8 +298,8 @@ public class App {
    
 
     static void configurarSistema(){
-        nomeArquivoProdutos = "produtos.txt";
-        nomeArquivoClientes = "nomes.txt";
+        nomeArquivoProdutos = "C://Users//paulo//Downloads//testeAEDS-main//testeAEDS-main//Atividade4_Base//produtos.txt";
+        nomeArquivoClientes = "C://Users//paulo//Downloads//testeAEDS-main//testeAEDS-main//Atividade4_Base//nomes.txt";
         produtosPorId = lerProdutos(nomeArquivoProdutos, Produto::hashCode);
         clientesPorId = lerClientes(nomeArquivoClientes, Cliente::hashCode);
         produtosPorNome = new AVL<>(produtosPorId, prod -> prod.descricao, String::compareTo);
